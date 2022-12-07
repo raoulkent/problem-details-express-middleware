@@ -1,7 +1,7 @@
 import { getSomething } from '../lib/handle-health-request.js';
 
 const health = (req, res) => {
-  const { logger, healthService, body } = req;
+  const { logger, body } = req;
   logger.info('/health api called');
   res.status(200);
   return res.send(getSomething(body, logger));
