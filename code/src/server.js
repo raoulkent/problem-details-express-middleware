@@ -1,7 +1,8 @@
 const bodyParser = require('body-parser');
 const oasT = require('@oas-tools/core');
 const helmet = require('helmet');
-const { config } = require('./oastools.config');
+const path = require('path');
+// const { config } = require('./oastools.config');
 
 module.exports = (server, { logger, healthService }) => {
   if (!healthService) {
@@ -30,6 +31,22 @@ module.exports = (server, { logger, healthService }) => {
 
     next();
   });
+
+  const config = {
+    logger: {
+      level: 'info',
+      customLogger: logger,
+    },
+    oasFile: path.join(__dirname, './api/oas-file.yaml'),
+    middleware: {
+      router: {
+        controllers: path.join(__dirname, 'controllers'),
+      },
+      validator: {
+        strict: true,
+      },
+    },
+  };
 
   return new Promise((resolve) => {
     oasT.use(helmet());
