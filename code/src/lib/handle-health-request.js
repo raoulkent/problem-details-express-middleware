@@ -1,10 +1,12 @@
+const { AuthError } = require('../errors/errors');
+
 const failsSometimes = () =>
   new Promise((resolve, reject) => {
     const random = Math.random();
     if (random > 0.5) {
       resolve();
     }
-    reject(new Error('Random error'));
+    reject(new AuthError('Random error'));
   });
 
 exports.getSomething = (requestBody, logger) => {
