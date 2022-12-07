@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "NODE_ENV=development LOG_LEVEL=debug nodemon src/index.js -e js,json",
+    "dev": "NODE_ENV=development LOG_LEVEL=debug nodemon --exec babel-node src/index.js -e js,json",
     "lint:fix": "eslint --fix",
     "lint": "eslint",
     "test": "jest",
@@ -14,6 +14,9 @@
   "author": "Siljeving",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
     "@google-cloud/logging-winston": "^5.1.5",
     "@oas-tools/core": "^3.0.1",
     "body-parser": "^1.19.0",
