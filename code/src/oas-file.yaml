@@ -1,0 +1,34 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Health checker
+  license:
+    name: health
+servers:
+  - url: /
+    description: Localhost
+paths:
+  /health:
+    get:
+      summary: Get health check.
+      tags:
+        - health
+        - checker
+      x-router-controller: healthController
+      operationId: health
+      responses:
+        '200':
+          description: Success call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+        '400':
+          description: Error
+components:
+  schemas:
+    Health:
+      type: object
+      properties:
+        status:
+          type: string

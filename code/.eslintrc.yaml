@@ -1,0 +1,9 @@
+extends:
+  - airbnb-base
+  - eslint-config-prettier
+  - plugin:jest/recommended
+rules:
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies:
+        - src/tests/**
