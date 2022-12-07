@@ -3,6 +3,9 @@ extends:
   - eslint-config-prettier
   - plugin:jest/recommended
 rules:
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: '^_'
   import/no-extraneous-dependencies:
     - error
     - devDependencies:
