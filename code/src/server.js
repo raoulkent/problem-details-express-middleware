@@ -1,23 +1,18 @@
-const bodyParser = require('body-parser');
-const oasT = require('@oas-tools/core');
-const helmet = require('helmet');
-const path = require('path');
+import { initialize, use } from '@oas-tools/core';
+
+import express from 'express';
+import { fileURLToPath } from 'url';
+import helmet from 'helmet';
+import path from 'path';
+
 // const { config } = require('./oastools.config');
 
-module.exports = (server, { logger, healthService }) => {
-  if (!healthService) {
-    // TODO: Change me section to correspond to your service.
-    throw Error('healthService publisher not loaded');
-  }
+export default (server, { logger, healthService }) => {
   if (!logger) {
     throw Error('Logger not loaded');
   }
 
-  server.use(
-    bodyParser.json({
-      strict: false,
-    })
-  );
+  server.use(express.json());
 
   server.use((req, _res, next) => {
     req.logger = logger;
@@ -31,6 +26,10 @@ module.exports = (server, { logger, healthService }) => {
 
     next();
   });
+
+  const __filename = fileURLToPath(import.meta.url);
+
+  const __dirname = path.dirname(__filename);
 
   const config = {
     logger: {
@@ -49,8 +48,8 @@ module.exports = (server, { logger, healthService }) => {
   };
 
   return new Promise((resolve) => {
-    oasT.use(helmet());
+    use(helmet());
 
-    oasT.initialize(server, config).then(() => resolve(server));
+    initialize(server, config).then(() => resolve(server));
   });
 };

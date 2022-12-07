@@ -1,11 +1,9 @@
-const { transports, createLogger, format } = require('winston');
-const { LoggingWinston } = require('@google-cloud/logging-winston');
+import { createLogger, format, transports } from 'winston';
+
+import { LoggingWinston } from '@google-cloud/logging-winston';
 
 const consoleLogger = new transports.Console({
-  format: format.combine(
-    format.colorize(),
-    format.simple(),
-  ),
+  format: format.combine(format.colorize(), format.simple()),
 });
 
 const stackdriverLogger = new LoggingWinston({
@@ -15,19 +13,13 @@ const stackdriverLogger = new LoggingWinston({
   },
 });
 
-module.exports = createLogger({
-  format: format.combine(
-    format.timestamp(),
-    format.json(),
-  ),
+export default createLogger({
+  format: format.combine(format.timestamp(), format.json()),
   transports: ((env) => {
     if (env === 'development') {
       return [consoleLogger];
     }
 
-    return [
-      consoleLogger,
-      stackdriverLogger,
-    ];
+    return [consoleLogger, stackdriverLogger];
   })(process.env.NODE_ENV),
 });

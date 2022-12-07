@@ -1,4 +1,4 @@
-const { AuthError } = require('../errors/errors');
+import { AuthError } from '../errors/errors.js';
 
 const failsSometimes = () =>
   new Promise((resolve, reject) => {
@@ -9,7 +9,7 @@ const failsSometimes = () =>
     reject(new AuthError('Random error'));
   });
 
-exports.getSomething = (requestBody, logger) => {
+function getSomething(requestBody, logger) {
   let calledWith;
   try {
     failsSometimes();
@@ -20,4 +20,6 @@ exports.getSomething = (requestBody, logger) => {
   }
   logger.info(`handle-health-request called with ${calledWith}`);
   return { status: 'OK' };
-};
+}
+
+export { getSomething };

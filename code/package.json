@@ -2,7 +2,8 @@
   "name": "nodejs-dummy",
   "version": "1.0.0",
   "description": "Dummy Data Provider",
-  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "NODE_ENV=development LOG_LEVEL=debug nodemon src/index.js -e js,json",
@@ -21,6 +22,7 @@
     "eslint-config-prettier": "^8.5.0",
     "express": "^4.17.1",
     "helmet": "^6.0.0",
+    "import-meta-resolve": "^2.2.0",
     "js-yaml": "^4.1.0",
     "modern-errors": "^5.3.1",
     "modern-errors-http": "^2.3.0",

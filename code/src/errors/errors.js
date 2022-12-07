@@ -1,5 +1,5 @@
-const ModernError = require('modern-errors');
-const modernErrorsHttp = require('modern-errors-http');
+import ModernError from 'modern-errors';
+import modernErrorsHttp from 'modern-errors-http';
 
 const BaseError = ModernError.subclass('BaseError', {
   plugins: [modernErrorsHttp],
@@ -12,7 +12,4 @@ const AuthError = BaseError.subclass('AuthError', {
   },
 });
 
-module.exports = {
-  BaseError,
-  AuthError,
-};
+export { BaseError, AuthError };

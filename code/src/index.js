@@ -1,8 +1,7 @@
-const http = require('http');
-const express = require('express');
-const logger = require('./config/logger');
-const healthService = require('./lib/handle-health-request'); // TODO: Change me to your service. Add more rows if multiple services
-const serverInit = require('./server');
+import { createServer as _createServer } from 'http';
+import express from 'express';
+import logger from './config/logger.js';
+import serverInit from './server.js';
 
 const expressInstance = express();
 
@@ -11,12 +10,11 @@ const serverPort = process.env.PORT || 3002;
 const server = () =>
   serverInit(expressInstance, {
     logger,
-    healthService, // TODO: change me according to your service name.
   });
 
 const createServer = () =>
   new Promise((resolve, _reject) => {
-    http.createServer(expressInstance).listen(serverPort, resolve);
+    _createServer(expressInstance).listen(serverPort, resolve);
   });
 
 const logServerReady = () => {
