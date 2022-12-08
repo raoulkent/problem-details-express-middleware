@@ -11,7 +11,3 @@ export const FooError = BaseError.subclass("FooError", {
     status: 418,
   },
 });
-
-const errors = { BaseError, FooError };
-
-export default errors;
