@@ -1,20 +1,23 @@
-import { join } from 'path';
-import logger from './config/logger';
+import path from "path";
+import { fileURLToPath } from "url";
 
-const config = {
+import logger from "./config/logger.js";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+export default {
   logger: {
-    level: 'info',
+    level: "info",
     customLogger: logger,
   },
-  oasFile: join(__dirname, './oas-file.yaml'),
+  oasFile: path.join(dirname, "./api/oas-file.yaml"),
   middleware: {
     router: {
-      controllers: join(__dirname, 'controllers'),
+      controllers: path.join(dirname, "controllers"),
     },
     validator: {
       strict: true,
     },
   },
 };
-
-export default config;

@@ -1,7 +1,6 @@
 extends:
   - airbnb-base
   - eslint-config-prettier
-  - plugin:jest/recommended
 rules:
   no-unused-vars:
     - error
@@ -10,9 +9,10 @@ rules:
     - error
     - js: always
       json: always
-  import/prefer-default-export:
-    - off
-  import/no-extraneous-dependencies:
-    - error
-    - devDependencies:
-        - src/tests/**
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+  ecmaFeatures:
+    impliedStrict: true
+    classes: true
+    jsx: true

@@ -1,4 +1,4 @@
-import { AuthError } from '../errors/errors.js';
+import { AuthError } from "../errors/errors.js";
 
 const failsSometimes = () =>
   new Promise((resolve, reject) => {
@@ -6,20 +6,20 @@ const failsSometimes = () =>
     if (random > 0.5) {
       resolve();
     }
-    reject(new AuthError('Random error'));
+    reject(new AuthError("Random error"));
   });
 
-function getSomething(requestBody, logger) {
+export default function getSomething(requestBody, logger) {
   let calledWith;
   try {
     failsSometimes();
     calledWith = JSON.stringify(requestBody);
   } catch (e) {
-    calledWith = 'empty';
+    calledWith = "empty";
     logger.error(e.message);
   }
   logger.info(`handle-health-request called with ${calledWith}`);
-  return { status: 'OK' };
+  return { status: "OK" };
 }
 
 export { getSomething };

@@ -1,6 +1,5 @@
-import { createLogger, format, transports } from 'winston';
-
-import { LoggingWinston } from '@google-cloud/logging-winston';
+import { LoggingWinston } from "@google-cloud/logging-winston";
+import { createLogger, format, transports } from "winston";
 
 const consoleLogger = new transports.Console({
   format: format.combine(format.colorize(), format.simple()),
@@ -9,14 +8,14 @@ const consoleLogger = new transports.Console({
 const stackdriverLogger = new LoggingWinston({
   projectId: process.env.PROJECT_ID,
   serviceContext: {
-    service: 'timeCards-invoker',
+    service: "timeCards-invoker",
   },
 });
 
 export default createLogger({
   format: format.combine(format.timestamp(), format.json()),
   transports: ((env) => {
-    if (env === 'development') {
+    if (env === "development") {
       return [consoleLogger];
     }
 
