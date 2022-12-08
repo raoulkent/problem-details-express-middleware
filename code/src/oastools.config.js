@@ -12,7 +12,6 @@ export default {
     level: "info",
     customLogger: logger,
   },
-  oasFile: path.join(dirname, "./api/oas-file.yaml"),
   middleware: {
     error: {
       customHandler: modernHttpErrorMiddleware,
