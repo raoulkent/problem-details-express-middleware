@@ -1,15 +1,17 @@
 import ModernError from "modern-errors";
 import modernErrorsHttp from "modern-errors-http";
 
-const BaseError = ModernError.subclass("BaseError", {
+export const BaseError = ModernError.subclass("BaseError", {
   plugins: [modernErrorsHttp],
 });
 
-const AuthError = BaseError.subclass("AuthError", {
+export const FooError = BaseError.subclass("FooError", {
   http: {
     type: "https://example.com/probs/auth",
-    status: 401,
+    status: 418,
   },
 });
 
-export { BaseError, AuthError };
+const errors = { BaseError, FooError };
+
+export default errors;
