@@ -16,14 +16,11 @@ export default {
   middleware: {
     error: {
       customHandler: (err, send) => {
-        logger.info(
-          `Error is instanceOf BaseError: ${err instanceof BaseError}`
-        );
-        logger.info(`Error is: ${JSON.stringify(err)}`);
-        logger.info("------------------");
-        const { stack: _, ...rest } = BaseError.httpResponse(err);
+        // eslint-disable-next-line no-unused-vars
+        const { stack: _, ...httpResponse } = BaseError.httpResponse(err);
+        const { status } = httpResponse;
         if (err instanceof BaseError) {
-          send(rest.status, rest);
+          send(status, httpResponse);
         }
       },
     },
